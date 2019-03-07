@@ -19,11 +19,11 @@ function file_exists() {
 }
 
 
-if file_exists $HOME/.zsh.aliases/directory.zsh ; then
-    source $HOME/.zsh.aliases/directory.zsh
+if file_exists $HOME/.custom-zsh/aliases/directory.zsh ; then
+    source $HOME/.custom-zsh/aliases/directory.zsh
 fi
-if file_exists $HOME/.zsh.aliases/hardware.zsh ; then
-    source $HOME/.zsh.aliases/hardware.zsh
+if file_exists $HOME/.custom-zsh/aliases/hardware.zsh ; then
+    source $HOME/.custom-zsh/aliases/hardware.zsh
 fi
 
 
