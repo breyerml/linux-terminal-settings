@@ -7,7 +7,7 @@ fi
 if command_exists nvidia-smi ; then             # use nvidia-smi to display gpu info if possible else use fallback
     alias gpu='nvidia-smi'
 else
-    alias gpu='lspci -vnn | grep VGA -A 12'
+    alias gpu='lspci -vnn | \grep VGA -A 12'
 fi
 
 alias ram='free -h'                             # list current RAM usaged
@@ -40,11 +40,21 @@ fi
 
 function temp() {
     if command_exists sensors ; then
-        echo "Mainboard Device Temperatures:"
+        echo -e "\033[1mCPU Temperatures:\033[0m"
         sensors
     fi
+    if command_exists nvidia-smi ; then
+        echo -e "\033[1mGPU Temperatures:\033[0m"
+        local gpus="$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)"
+        local count=1
+        while read -r gpus; do
+            echo "GPU $count: $gpus°C"
+            counter=$((counter + 1))
+        done <<< "$gpus"
+        echo 
+    fi
     if (command_exists hddtemp) && (has_elevated_privileges) ; then
-        echo "Memory Device Temperatures:"
+        echo -e "\033[1mMemory Device Temperatures:\033[0m"
         local devices=$(ls /dev | \grep "sd.")
         while read -r devices; do
             if ! [[ $devices =~ [^A-Za-z]+ ]]; then
