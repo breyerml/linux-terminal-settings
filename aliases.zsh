@@ -17,6 +17,12 @@ function file_exists() {
         return 1
     fi
 }
+function has_elevated_privileges() {
+    if ! sudo -v &>/dev/null ; then
+        echo "NO ELEVATED PRIVILEGES"
+        return 1
+    fi
+}
 
 
 if file_exists $HOME/.custom-zsh/aliases/directory.zsh ; then
@@ -49,7 +55,7 @@ alias bc='bc -ql'                           # don't print bc welcome and use mat
 
 alias pstree='pstree -lh'                   # show current process-tree, highlighting current process
 alias pss='ps -fC'                          # find processes by name
-alias ports='sudo netstat -tuanp'           # list all open ports 
+
 alias ping='ping -c 5'                      # default ping 5 times
 alias path='echo -e ${PATH//:/\\n}'         # list all PATH variables
 alias manpath='echo -e ${MANPATH//:/\\n}'   # list all MAN_PATH variables
