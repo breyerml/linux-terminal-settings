@@ -60,7 +60,7 @@ alias bc='bc -ql'                           # don't print bc welcome and use mat
 alias pstree='pstree -lh'                   # show current process-tree, highlighting current process
 alias pss='ps -fC'                          # find processes by name
 
-alias ping='ping -c 5'                      # default ping 5 times
+
 alias path='echo -e ${PATH//:/\\n}'         # list all PATH variables
 alias manpath='echo -e ${MANPATH//:/\\n}'   # list all MAN_PATH variables
 alias ld_library_path='echo -e ${LD_LIBRARY_PATH//:/\\n}'   # list all LD_LIBRARY_PATH variables
