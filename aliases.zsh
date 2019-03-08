@@ -29,16 +29,6 @@ function has_elevated_privileges() {
 }
 
 
-if file_exists $CUSTOM_ZSH_ROOT/aliases/directory.zsh ; then
-    source $CUSTOM_ZSH_ROOT/aliases/directory.zsh
-fi
-if file_exists $CUSTOM_ZSH_ROOT/aliases/hardware.zsh ; then
-    source $CUSTOM_ZSH_ROOT/aliases/hardware.zsh
-fi
-
-
-
-
 # ==== grep ====
 alias grep='grep --color=always'            # color normal grep output
 alias egrep='egrep --color=always'          # color egrep output
