@@ -166,3 +166,7 @@ archive() {
     *)            echo "'$1' is no valid archive type"
   esac
 }
+
+
+# terminal calculator
+alias calculator='gcalccmd'
