@@ -35,7 +35,9 @@ fi
 if file_exists $CUSTOM_ZSH_ROOT/aliases/hardware.zsh ; then
     source $CUSTOM_ZSH_ROOT/aliases/hardware.zsh
 fi
-
+if file_exists $CUSTOM_ZSH_ROOT/aliases/git.zsh ; then
+    source $CUSTOM_ZSH_ROOT/aliases/git.zsh
+fi
 
 
 
@@ -44,14 +46,6 @@ alias grep='grep --color=always'            # color normal grep output
 alias egrep='egrep --color=always'          # color egrep output
 alias fgrep='fgrep --color=always'          # color fgrep output
 alias rgrep='rgrep --color=always'          # color rgrep output
-
-# === git ====
-alias gits='git status'                                     # show git status message
-alias gitd='git diff --color=always'                        # show git difference with colors
-alias gitc='git commit -m'                                  # commit staged changes
-alias gita='git add -A'                                     # add all untracked and/or changed files
-alias gitac='git commit -am'                                # add all untracked and/or changed files and commit them
-alias gitl='git log --graph --abbrev-commit --decorate'     # show log as graph with abbreviated commit ids
 
 
 # ==== others ====
