@@ -1,3 +1,7 @@
+if [[ -z $CUSTOM_ZSH_ROOT ]]; then
+        export CUSTOM_ZSH_ROOT="$( cd "$(dirname "$0")" ; pwd -P )"
+fi
+
 # ==== google chrome ====
 alias chrome='google-chrome >/dev/null 2>&1'
 alias chrome-stable='google-chrome-stable >/dev/null 2>&1'
@@ -25,11 +29,11 @@ function has_elevated_privileges() {
 }
 
 
-if file_exists $HOME/.custom-zsh/aliases/directory.zsh ; then
-    source $HOME/.custom-zsh/aliases/directory.zsh
+if file_exists $CUSTOM_ZSH_ROOT/aliases/directory.zsh ; then
+    source $CUSTOM_ZSH_ROOT/aliases/directory.zsh
 fi
-if file_exists $HOME/.custom-zsh/aliases/hardware.zsh ; then
-    source $HOME/.custom-zsh/aliases/hardware.zsh
+if file_exists $CUSTOM_ZSH_ROOT/aliases/hardware.zsh ; then
+    source $CUSTOM_ZSH_ROOT/aliases/hardware.zsh
 fi
 
 
