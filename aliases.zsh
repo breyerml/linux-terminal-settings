@@ -56,9 +56,11 @@ alias gitl='git log --graph --abbrev-commit --decorate'     # show log as graph 
 
 # ==== others ====
 alias bc='bc -ql'                           # don't print bc welcome and use math library
-
-alias pstree='pstree -lh'                   # show current process-tree, highlighting current process
-alias pss='ps -fC'                          # find processes by name
+alias wget='wget -c'                        # continue wget in case of error
+# Parenting changing perms on / #
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
 
 
 alias path='echo -e ${PATH//:/\\n}'         # list all PATH variables
@@ -69,6 +71,8 @@ alias diff='colordiff'                      # always diff with colors
 alias goodnight='shutdown -h now'           # shutdown computer
 
 
+# ==== misc ====
+alias today='date "+"'
 
 # ==== colorfull man pages ====
 export LESS_TERMCAP_mb=$'\e[1;31m'        # begin blinking
