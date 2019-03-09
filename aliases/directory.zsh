@@ -40,24 +40,19 @@ if [ -n "$ZSH_VERSION" ]; then              ## global aliases only defined in ZS
     alias -g .....='../../../..'            # move four directories up
     alias -g ......='../../../../..'        # move five directories up
 fi
-function dc() {                             # Jump back to a given directory in the current working directory
+function cd() {                             # cd with the option to jump back to a given directory in the current working directory
     local next_dir=$1
-    if [[ ${next_dir: -1} == '/' ]]; then   ## delete trailing "/" if present
-        next_dir=${next_dir: : -1}
-        echo $next_dir
-    fi
-    if [[ $next_dir == '..' ]]; then        ## "dc .." does nothing
-        return 2
-    elif [[ $next_dir == '-' ]]; then       ## "dc -" behaves like "cd -"
-        cd -
-    elif [[ $next_dir == $HOME ]]; then     ## "dc ~" behaves like "cd ~"
-        cd ~
-    elif [[ $PWD == *$next_dir* ]]; then    ## cd to the given parent directory
-        local new_dir=$(pwd | nawk -F "/$next_dir/" '{print $1}')
-        cd $new_dir'/'$next_dir
-    else                                    ## given directory isn't a parent
-        echo "dc: no such file or directory: $next_dir"
-        return 1
+    builtin cd $next_dir >/dev/null 2>&1        ## try to cd
+    if [[ $? != 0 ]]; then                      ## try to jump back if cd failed
+        if [[ ${next_dir: -1} == '/' ]]; then   ## delete trailing "/" if present
+            next_dir=${next_dir: : -1}
+        fi
+        if [[ $PWD == *$next_dir* ]]; then      ## check if you can jump to the specific directory
+            local new_dir=$(pwd | nawk -F "/$next_dir/" '{print $1}')
+            builtin cd $new_dir'/'$next_dir
+        else                                    ## illegal cd
+            echo "cd: no such file or directory: $next_dir"
+        fi
     fi
 }
 
