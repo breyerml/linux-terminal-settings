@@ -48,7 +48,10 @@ fi
 if command_exists hddtemp ; then
     function memory-temp() {                   # display memeory temperatures
         if has_elevated_privileges ; then
-            sudo hddtemp /dev/sd?
+            local count=$(find /dev -name "sd?" | wc -l)
+            if [[ $count != 0 ]]; then
+                sudo hddtemp /dev/sd?
+            fi
         else
             echo "Error: elevated privileges needed!"
         fi
@@ -57,7 +60,10 @@ fi
 if command_exists nvme ; then
     function nvme-temp() {
         if has_elevated_privileges ; then
-            sudo nvme smart-log /dev/nvme?
+            local count=$(find /dev -name "nvme?" | wc -l)
+            if [[ $count != 0 ]]; then
+                sudo nvme smart-log /dev/nvme?
+            fi
         else 
             echo "Error: elevated privileges needed!"
         fi
