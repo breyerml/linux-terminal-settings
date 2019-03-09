@@ -1,14 +1,4 @@
-### linux-terminal-settings: TODOs
-
-- [ ] check if /dev/sd? exists
-- [ ] check if /dev/nvme? exists
-- [ ] remove unnecessary information from nvme-temp
-- [ ] usefull README
-- [ ] list of commands in README
-- [ ] OSX compatible
-
-
-### List of commands
+### List of touched commands
 #### 1. aliases.zsh
 - `command_exists()`   checks if passed command exists
 - `file_exists()` checks if passed filename exists
@@ -24,14 +14,17 @@
 - `gitac` add all untracked and/or changed files and commit them
 - `gitl` show log as graph with abbreviated commit ids
 - `bc` a math library
-- `pstree` show current process-tree
-- `pss`  find processes tree by name
+- `wget` continue wget in case of error
+- `chown` change owner
+- `chmod` change mode
+- `chgrp` change group
 - `path` list all PATH variables
 - `manpath` list all MAN_PATH variables
 - `ld_library_path` list all LD_LIBRARY_PATH variables
 - `pkg_config_path` list all PKG_CONFIG_PATH variables
 - `diff` 
 - `goodnight` shutdown the computer
+- `today` display date
 
 ##### 2. directory.zsh
 - `ls` list files
@@ -61,7 +54,7 @@
 - `mkcd` create new directory and cd in it
 - `findf` find files or directories with a given pattern in a given directory
 - `findh` find files or directories in the current directory with a given pattern
-- `touch` touch with template support
+- `toucht` touch with template support
 - `pstat` show statistics for a file
 - `duc` list all non-hidden file sizes human-readable in descending order
 - `dua` list all file sizes human-readable in descending order
@@ -75,3 +68,35 @@
 - `dc..` `dc ..`
 - `dc-` `dc -`
 - `dc~` `dc ~`
+
+##### 3. hardware.zsh
+- `cpu` list cpu infos (short)
+- `cpu-info` list cpu infos (longer)
+- `cpu-temp` display cpu temperatures
+- `gpu` display full GPU info
+- `gpu-temp` display temeprature only
+- `ram` list current RAM usaged
+- `ram-info` list RAM info: usage + more infos
+- `memory` memory usage
+- `memory-temp` display memeory temperatures
+- `temp-info` diplays multiple temperature infos
+- `ports` list all open ports
+- `ping` default ping 5 times
+- `network-adapter` list all network adapters
+- `network-adapter` list all network adapters with detailed information
+- `network-connected` list all devices connected to this network
+- `myip` list current IPs
+- `speedtest` check current internet speed
+- `ifstat` display current network traffic
+- `traffic-total`  display total network traffic
+- `jobs` displays status of jobs in the current shell session including IDs
+- `jobsr` display only running jobs with IDs
+- `jobsss` display only stopped jobbs with IDs
+- `pstree` show current process-tree, highlighting current process
+- `pss` find processes by name
+- `psa` list all processes (using less)
+- `psram` get top 10 process eating memory
+- `pscpu` get top 10 process eating cpu
+- `htop` display hardware usage
+- `hs` search for specific command in history
+
