@@ -14,7 +14,7 @@ alias lf='ls -hAF | grep -E'                # find all files with the given patt
 alias lt='ls -Alht'                         # list all files sorted by time (newest first)
 alias ltr='ls -Alhtr'                       # list all files sorted by time (oldest first)
 alias lss='ls -AlhS'                        # list all files sorted by size (biggest first)
-alias lss='ls -AlhSr'                       # list all files sorted by size (smallest first)
+alias lssr='ls -AlhSr'                       # list all files sorted by size (smallest first)
 
 # ==== tree ====
 if command_exists tree ; then
