@@ -112,3 +112,57 @@ if [[ -z $CUSTOM_ZSH_ROOT ]]; then
 	[ -r $CUSTOM_ZSH_ROOT/aliases/directory.zsh ] && source $CUSTOM_ZSH_ROOT/aliases/directory.zsh	
 	[ -r $CUSTOM_ZSH_ROOT/aliases/hardware.zsh ] && source $CUSTOM_ZSH_ROOT/aliases/hardware.zsh
 fi
+
+
+# extract compressed files
+extract() {
+  if [[ -f $1 ]]
+  then
+    case "$1" in
+      *.tar.bz2)  tar -xvjf "$1"    ;;
+      *.tar.gz)   tar -xvzf "$1"    ;;
+      *.bz2)      bunzip2 "$1"      ;;
+      *.rar)      unrar -x "$1"     ;;
+      *.gz)       gunzip "$1"       ;;
+      *.tar)      tar -xvf "$1"     ;;
+      *.tbz2)     tar -xvjf "$1"    ;;
+      *.tgz)      tar -xvzf "$1"    ;;
+      *.zip)      unzip "$1"        ;;
+      *.Z)        uncompress "$1"   ;;
+      *.7z)       7z x "$1"        ;;
+      *)          echo "'$1' cannot be extracted" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+# archive files with a given compression
+archive() {
+  if [ "$#" -lt 2 ]
+  then
+    echo "not enough parameters"
+    return 1
+  fi
+
+  for X in "${@:2}"
+  do
+    if ! [[ -f $X || -d $X ]]
+    then
+      echo "'$X' is not a file or directory"
+      return 1
+    fi
+  done
+
+  case "$1" in
+    "tar.bz2")    tar -cvjSf archive.tar.bz2 "${@:2}" ;;
+    "tar.gz")     tar -czf archive.tar.gz "${@:2}"    ;;
+    "rar")        rar a -m5 archive.rar "${@:2}"      ;;
+    "tar")        tar -cf archive.tar "${@:2}"        ;;
+    "tbz2")       tar -jcvf archive.tbz2 "${@:2}"     ;;
+    "tgz")        tar -zcvf archive.tgz "${@:2}"      ;;
+    "zip")        zip archive.zip "${@:2}"            ;;
+    "7z")         7z a -t7z -m0=LZMA -mmt=on -mx=9 -md=96m -mfb=256 archive.7z "${@:2}"    ;;
+    *)            echo "'$1' is no valid archive type"
+  esac
+}
