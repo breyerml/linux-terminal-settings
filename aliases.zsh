@@ -72,7 +72,12 @@ alias goodnight='shutdown -h now'           # shutdown computer
 
 
 # ==== misc ====
-alias today='date "+"'
+alias today='date "+%A %d %B %Y (%Y-%m-%d %Z %z) Week: %V"'
+alias now='date "+%H:%M:%S.%3N"'
+alias timezone='timedatectl'
+
+alias user='whoami'
+alias watch='watch '
 
 # ==== colorfull man pages ====
 export LESS_TERMCAP_mb=$'\e[1;31m'        # begin blinking
