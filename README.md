@@ -24,14 +24,17 @@
 - `gitac` add all untracked and/or changed files and commit them
 - `gitl` show log as graph with abbreviated commit ids
 - `bc` a math library
-- `pstree` show current process-tree
-- `pss`  find processes tree by name
+- `wget` continue wget in case of error
+- `chown` change owner
+- `chmod` change mode
+- `chgrp` change group
 - `path` list all PATH variables
 - `manpath` list all MAN_PATH variables
 - `ld_library_path` list all LD_LIBRARY_PATH variables
 - `pkg_config_path` list all PKG_CONFIG_PATH variables
 - `diff` 
 - `goodnight` shutdown the computer
+- `today` display date
 
 ##### 2. directory.zsh
 - `ls` list files
@@ -96,4 +99,14 @@
 - `speedtest` check current internet speed
 - `ifstat` display current network traffic
 - `traffic-total`  display total network traffic
+- `jobs` displays status of jobs in the current shell session including IDs
+- `jobsr` display only running jobs with IDs
+- `jobsss` display only stopped jobbs with IDs
+- `pstree` show current process-tree, highlighting current process
+- `pss` find processes by name
+- `psa` list all processes (using less)
+- `psram` get top 10 process eating memory
+- `pscpu` get top 10 process eating cpu
 - `htop` display hardware usage
+- `hs` search for specific command in history
+
