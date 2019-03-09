@@ -8,7 +8,7 @@
 - [ ] OSX compatible
 
 
-### List of commands
+### List of touched commands
 #### 1. aliases.zsh
 - `command_exists()`   checks if passed command exists
 - `file_exists()` checks if passed filename exists
@@ -61,7 +61,7 @@
 - `mkcd` create new directory and cd in it
 - `findf` find files or directories with a given pattern in a given directory
 - `findh` find files or directories in the current directory with a given pattern
-- `touch` touch with template support
+- `toucht` touch with template support
 - `pstat` show statistics for a file
 - `duc` list all non-hidden file sizes human-readable in descending order
 - `dua` list all file sizes human-readable in descending order
@@ -75,3 +75,25 @@
 - `dc..` `dc ..`
 - `dc-` `dc -`
 - `dc~` `dc ~`
+
+##### 3. hardware.zsh
+- `cpu` list cpu infos (short)
+- `cpu-info` list cpu infos (longer)
+- `cpu-temp` display cpu temperatures
+- `gpu` display full GPU info
+- `gpu-temp` display temeprature only
+- `ram` list current RAM usaged
+- `ram-info` list RAM info: usage + more infos
+- `memory` memory usage
+- `memory-temp` display memeory temperatures
+- `temp-info` diplays multiple temperature infos
+- `ports` list all open ports
+- `ping` default ping 5 times
+- `network-adapter` list all network adapters
+- `network-adapter` list all network adapters with detailed information
+- `network-connected` list all devices connected to this network
+- `myip` list current IPs
+- `speedtest` check current internet speed
+- `ifstat` display current network traffic
+- `traffic-total`  display total network traffic
+- `htop` display hardware usage
