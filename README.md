@@ -5,3 +5,4 @@
 - [ ] remove unnecessary information from nvme-temp
 - [ ] usefull README
 - [ ] list of commands in README
+- [ ] OSX compatible
