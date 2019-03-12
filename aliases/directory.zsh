@@ -40,21 +40,9 @@ if [ -n "$ZSH_VERSION" ]; then              ## global aliases only defined in ZS
     alias -g .....='../../../..'            # move four directories up
     alias -g ......='../../../../..'        # move five directories up
 fi
-function cd() {                             # cd with the option to jump back to a given directory in the current working directory
-    local next_dir=$1
-    builtin cd $next_dir >/dev/null 2>&1        ## try to cd
-    if [[ $? != 0 ]]; then                      ## try to jump back if cd failed
-        if [[ ${next_dir: -1} == '/' ]]; then   ## delete trailing "/" if present
-            next_dir=${next_dir: : -1}
-        fi
-        if [[ $PWD == *$next_dir* ]]; then      ## check if you can jump to the specific directory
-            local new_dir=$(pwd | nawk -F "/$next_dir/" '{print $1}')
-            builtin cd $new_dir'/'$next_dir
-        else                                    ## illegal cd
-            echo "cd: no such file or directory: $next_dir"
-        fi
-    fi
-}
+
+
+
 
 # ==== other ====
 alias cpwd='pwd | tr -d "\n" | clipcopy'    # copy current working directory to clipboard TODO: clipcopy selber

@@ -27,6 +27,7 @@ function has_elevated_privileges() {
         return 1
     fi
 }
+function echoerr { echo "$@" 1>&2; }
 
 
 if file_exists $CUSTOM_ZSH_ROOT/aliases/directory.zsh ; then
@@ -38,7 +39,9 @@ fi
 if file_exists $CUSTOM_ZSH_ROOT/aliases/git.zsh ; then
     source $CUSTOM_ZSH_ROOT/aliases/git.zsh
 fi
-
+if file_exists $CUSTOM_ZSH_ROOT/aliases/cd.zsh ; then
+    source $CUSTOM_ZSH_ROOT/aliases/cd.zsh
+fi
 
 
 # ==== grep ====
