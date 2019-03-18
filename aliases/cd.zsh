@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# TODO: überarbeiten
 # ==== change directory (cd) ====
 if [ -n "$ZSH_VERSION" ]; then              ## global aliases only defined in ZSH
     alias -g ...='../..'                    # move two directories up
