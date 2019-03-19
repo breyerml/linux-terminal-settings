@@ -6,7 +6,7 @@ The plugin provides better directory trees.
 
 ## Functions
 
-`dirtree` show the directory structure in a hierarchical manner.
+`dirtree` and `filetree` to show the directory/file structure in a hierarchical manner.
 
 | Function/Alias | Description                                                         |
 | -------------- | ------------------------------------------------------------------- |
