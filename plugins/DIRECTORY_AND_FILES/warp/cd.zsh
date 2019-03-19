@@ -1,4 +1,13 @@
 #!/bin/bash
+# TODO: überarbeiten
+# ==== change directory (cd) ====
+if [ -n "$ZSH_VERSION" ]; then              ## global aliases only defined in ZSH
+    alias -g ...='../..'                    # move two directories up
+    alias -g ....='../../..'                # move three directories up
+    alias -g .....='../../../..'            # move four directories up
+    alias -g ......='../../../../..'        # move five directories up
+fi
+
 
 local warp_file_dir="$( cd "$(dirname "$0")" ; pwd -P )/.warp_points"
 if ! file_exists $warp_file_dir ; then
