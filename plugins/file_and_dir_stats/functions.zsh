@@ -1,4 +1,7 @@
-function pstat() {                          # show statistic for one file
+# TODO: multiple files/dirs
+
+# ==== show statistic for one file ====
+function pstat() {                          
     ## Name - Type - Owner - Size - Permissions - Access - Modify - Change
     local values=$(stat --printf "%N\n%F\n%U\n%s\n%A\n%X\n%Y\n%Z" $1)
     if [[ -n $values ]]; then               ## check if stat command succeded
@@ -20,8 +23,11 @@ function pstat() {                          # show statistic for one file
         done
     fi
 }
-if command_exists ncdu ; then
-    alias duc='ncdu '                            # use "ncdu"hardware.zsh as "du" alternativ
+
+# ==== show statistics for directories
+if (( $+commands[ncdu] )) ; then
+    alias duc='ncdu '                            # use "ncdu" as "du" alternativ
+    alias dua='ncdu '
 else 
     function duc() { \du -hc $1 | sort -hr }     # list all non-hidden file sizes human-readable in descending order
     function dua() { \du -ahc $1 | sort -hr }    # list all file sizes human-readable in descending order

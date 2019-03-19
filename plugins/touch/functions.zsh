@@ -1,4 +1,5 @@
-function toucht() {                         # touch with template support
+# ==== touch with template support ====
+function toucht() {
     for file in "$@"; do                              ## support multiple files at once
         ## search for all templates in ~/Tempplates matching the specific filename extension
         local templates=$(find ~/Templates -type f -iname "*.${file##*.}")

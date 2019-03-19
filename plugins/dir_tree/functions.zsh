@@ -1,5 +1,5 @@
 # ==== tree ====
-if command_exists tree ; then
+if (( $+commands[tree] )) ; then
     alias dirtree='tree -d '                # show non-hidden directories in tree format
     alias filetree='tree --du -sh '         # show non-hidden directories and files with their corresponding size
 else 
