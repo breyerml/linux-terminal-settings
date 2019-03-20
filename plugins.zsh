@@ -55,7 +55,7 @@ warp
 ## source all plugins
 for plugin in $plugins ; do
     for file in "$CUSTOM_ZSH_ROOT"/plugins/**/"$plugin"/*.zsh ; do
-        echo "sourced file: $file"
+        # echo "sourced file: $file"
         source "$file"
     done
 done
