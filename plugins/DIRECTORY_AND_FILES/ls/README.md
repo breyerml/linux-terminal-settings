@@ -4,6 +4,8 @@
 
 This plugin defines useful aliases to display the contents of a directory.
 
+Uses the `dircolor` file in the current directory to specify the `LS_COLORS`.
+
 ## Aliases
 
 The following aliases are defined:
