@@ -48,9 +48,10 @@ touch
 warp 
 )
 
-#setopt null_glob
-#setopt extended_glob
-
+### TODO:
+setopt null_glob
+setopt extended_glob
+setopt NUMERIC_GLOB_SORT
 
 ## source all plugins
 for plugin in $plugins ; do
