@@ -2,9 +2,13 @@
 
 ## Description
 
-This plugin defines useful aliases to display the contents of a directory.
+This plugin defines useful aliases and functions to display the contents of a directory with coloring.
 
-Uses the `dircolor` file in the current directory to specify the `LS_COLORS` environmental variable.
+## Options
+
+If [vivid](https://github.com/sharkdp/vivid) is installed, it is used to change the `LS_COLORS` environmental variable based on the [solarized color scheme](https://en.wikipedia.org/wiki/Solarized_(color_scheme)) (also influencing the zsh completion system).
+
+If vivid isn't installed, uses the `dircolor` file ([see](https://github.com/trapd00r/LS_COLORS)) in the current directory to specify the `LS_COLORS` environmental variable.
 
 ## Aliases
 

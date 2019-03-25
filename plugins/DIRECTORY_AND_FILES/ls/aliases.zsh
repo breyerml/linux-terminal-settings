@@ -6,9 +6,6 @@
 # ====================================================================================
 
 
-eval "$(dircolors $(cd "$(dirname "$0")" ; pwd -P)/dircolors)"
-
-
 # color output if possible and change time stamp to (e.g.): 2019-03-05 18:48:51
 alias ls='ls --color=auto --time-style=+"%Y-%m-%d %H:%M:%S"'  
 

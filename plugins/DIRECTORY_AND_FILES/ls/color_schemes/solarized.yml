@@ -1,0 +1,100 @@
+colors:
+  # Solarized colors
+  green: "859900"
+  cyan: "2aa198"
+  blue: "268bd2"
+  violet: "6c71c4"
+  magenta: "d33682"
+  red: "dc322f"
+  orange: "cb4b16"
+  yellow: "b58900"
+  base3: "fdf6e3"
+  base2: "eee8d5"
+  base1: "93a1a1"
+  base0: "839496"
+  base00: "657b83"
+  base01: "586e75"
+  base02: "073642"
+  base03: "002b36"
+
+
+core:
+  regular_file: 
+    foreground: base1
+
+  directory:
+    foreground: blue
+
+  executable_file:
+    foreground: orange
+    font-style: bold
+
+  symlink:
+    foreground: magenta
+
+  broken_symlink:
+    foreground: base03
+    background: red
+
+  fifo:
+    foreground: base03
+    background: cyan
+
+  socket:
+    foreground: base03
+    background: magenta
+
+  normal_text:
+    foreground: base0
+
+text:
+  special:
+    foreground: base03
+    background: base2
+
+  todo:
+    foreground: base03
+    background: base2
+    font-style: bold
+
+  licenses:
+    foreground: yellow
+    font-style: bold
+
+  configuration:
+    foreground: cyan
+    font-style: bold
+
+  other:
+    foreground: base1
+
+markup:
+  foreground: green
+
+programming:
+  source:
+    foreground: green
+
+  tooling:
+    foreground: cyan
+
+    build:
+      foreground: cyan
+      font-style: underline
+
+media:
+  foreground: yellow
+
+office:
+  foreground: orange
+
+archives:
+  foreground: violet
+  font-style: underline
+
+executable:
+  foreground: red
+  font-style: bold
+
+unimportant:
+  foreground: base1
