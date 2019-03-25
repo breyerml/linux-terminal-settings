@@ -27,14 +27,14 @@ The following aliases are defined:
 | `lss`  | `ls -AlhS`         | list all files sorted by size (biggest first)                  |
 | `lssr` | `ls -AlhSr`        | list all files sorted by size (smallest first)                 |
 
-
 ## Functions
 
 The following functions are defined:
 
-| Function  | Description                                      |
-| --------- | ------------------------------------------------ |
-| `lsexec`  | list all executable files                        |
-| `lsempty` | list all empty files and directories             |
-| `lsmy`    | list all files owned by the shell user           |
-| `lstoday` | list all files modified today (since midnight) |
+| Function  | Description                                                                                                                                                    |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lsexec`  | list all executable files                                                                                                                                      |
+| `lsempty` | list all empty files and directories                                                                                                                           |
+| `lsmy`    | list all files owned by the shell user                                                                                                                         |
+| `lstoday` | list all files modified today (since midnight)                                                                                                                 |
+| `lsgen`   | list all files and directories matching the given zsh glob qualifier <br /> **→ the glob qualifier must be the first positional argument without parentheses** |
