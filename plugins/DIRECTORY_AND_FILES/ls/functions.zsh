@@ -110,3 +110,21 @@ function lstoday() {
 function lsgen() {
     _generic_ls "$@"
 }
+
+
+# count all non-hidden files
+# TODO: vlt pro dir anzeigen lassen?
+function lc() {
+    ls "$@" | wc -l
+}
+
+# count all files
+# TODO: vlt pro dir anzeigen lassen?
+function lac() {
+    ls -A "$@" | wc -l
+}
+
+# list all files without extensions in the current directory
+function lne() {
+    ls -AF "$@" | \egrep -v "(.+\..*|+/)" | column
+}
