@@ -85,3 +85,12 @@ alias rmdir='rmdir -pv '                    # delete all parent directories and 
 function mkcd() { mkdir $1; cd $1 }         # create new directory and cd in it
 function findf() { find $1 -iname $2 }      # find files or directories with a given pattern in a given directory
 function findh() { find . -iname $1 }       # find files or directories in the current directory with a given pattern
+
+# TODO: überarbeiten
+# ==== change directory (cd) ====
+if [ -n "$ZSH_VERSION" ]; then              ## global aliases only defined in ZSH
+    alias -g ...='../..'                    # move two directories up
+    alias -g ....='../../..'                # move three directories up
+    alias -g .....='../../../..'            # move four directories up
+    alias -g ......='../../../../..'        # move five directories up
+fi
