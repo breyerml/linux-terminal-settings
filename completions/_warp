@@ -1,0 +1,45 @@
+#compdef warp
+
+# easily read all lines of a file into an array
+zmodload zsh/mapfile
+
+_warp() {
+    local state ret=1
+    typeset -A opt_args
+
+    if (( $CURRENT == 2 )); then
+        ## complete all options %TODO: single letters
+        _arguments -C \
+            '-a[add new warp point]' \
+            '--add[add new warp point]' \
+            '-![replace warp point]' \
+            '--add![replace warp point]' \
+            '-rm[remove warp point]' \
+            '--remove[remove warp point]' \
+            '(-)-c[remove unused warp points]' \
+            '(-)--clean[remove unused warp points]' \
+            '(-)-l[list all warp points]' \
+            '(-)--list[list all warp points]' \
+            '(-)-h[display help message]' \
+            '(-)--help[display help message]' && ret=0
+    elif (( $CURRENT == 3 )); then
+        if [[ ${words[2]} =~ '^(--remove|-rm)$' ]]; then 
+            ## complete existing warp points for removing
+            local warp_file_dir="/home/marcel/.custom-zsh/plugins/DIRECTORY_AND_FILES/warp/.warp_points"
+            local -a warp_points
+             for line in "${(f)mapfile[$warp_file_dir]}"; do
+                warp_points+=(${line%%=*})
+            done 
+            _alternative "wp:warp points:($warp_points)" && ret=0
+        fi
+    elif (( $CURRENT == 4 )); then
+        ## complete directories as warp point target
+        if [[ ${words[2]} =~ '^(--add|-a|--add!|-!)$' ]]; then 
+            _path_files -/ && ret=0
+        fi
+    fi
+
+    return ret
+}
+
+_warp "$@"

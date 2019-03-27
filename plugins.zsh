@@ -61,6 +61,13 @@ for plugin in $plugins ; do
     done
 done
 
+# add completions directory to zsh's fpath
+fpath+=($CUSTOM_ZSH_ROOT/completions)
+
+# initialize zsh's completion system
+autoload -U compinit
+compinit -u
+
 
 
 
