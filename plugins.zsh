@@ -1,5 +1,5 @@
-if [[ -z $CUSTOM_ZSH_ROOT ]]; then
-        export CUSTOM_ZSH_ROOT="$( cd "$(dirname "$0")" ; pwd -P )"
+if [[ -z $ZSH_CUSTOM_ROOT ]]; then
+        export ZSH_CUSTOM_ROOT="$( cd "$(dirname "$0")" ; pwd -P )"
 fi
 
 
@@ -55,14 +55,14 @@ setopt NUMERIC_GLOB_SORT
 
 ## source all plugins
 for plugin in $plugins ; do
-    for file in "$CUSTOM_ZSH_ROOT"/plugins/**/"$plugin"/*.zsh ; do
+    for file in "$ZSH_CUSTOM_ROOT"/plugins/**/"$plugin"/*.zsh ; do
         # echo "sourced file: $file"
         source "$file"
     done
 done
 
 # add completions directory to zsh's fpath
-fpath+=($CUSTOM_ZSH_ROOT/completions)
+fpath+=($ZSH_CUSTOM_ROOT/completions)
 
 # initialize zsh's completion system
 autoload -U compinit
