@@ -170,8 +170,8 @@ function warp() {
 
     case $option in
         ('--add'|'-a')
-            ## if no directory is given use current working directory
-            if [[ $# == 1 ]]; then
+            ## if no directory (or the current) is given use current working directory
+            if [[ $# == 1 || $2 == '.' ]]; then
                 set $1 $PWD
             fi
             ## add a new warp point if the name isn't taken yet
