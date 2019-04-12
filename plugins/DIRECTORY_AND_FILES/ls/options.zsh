@@ -1,7 +1,7 @@
 # title           : ls/options.zsh
 # description     : This file provides various options changing the ls command.
 # date            : 2019-03-25
-# dependencies    : -
+# dependencies    : vivid (optional)
 # zsh_version     : 5.7.1
 # ====================================================================================
 
