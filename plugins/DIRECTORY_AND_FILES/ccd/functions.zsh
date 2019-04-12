@@ -5,6 +5,7 @@
 # zsh_version     : 5.7.1
 # ====================================================================================
 
+
 # try to cd to the given directory
 # -> if not possible: try to cd to a warp point with the given name
 # else: return an error
@@ -17,7 +18,8 @@ function ccd() {
     if [[ -n $warp_point_exists ]]; then
         ## try to cd to a warp point
         builtin cd "${warp_point_exists#*=}"
-    else                                                            ## illegal cd
+    else
+        ## illegal cd
         echoerr "cd: no such directory or warp point: $@"
         return 2
     fi
