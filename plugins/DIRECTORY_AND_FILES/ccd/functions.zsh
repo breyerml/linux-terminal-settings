@@ -9,17 +9,16 @@
 # -> if not possible: try to cd to a warp point with the given name
 # else: return an error
 function ccd() {
-  local next_dir="$1"
   ## try to normally cd
-  builtin cd "$next_dir" >/dev/null 2>&1
+  builtin cd "$@" >/dev/null 2>&1
   ## cd doesn't work
   if [[ $? != 0 ]]; then
-    local warp_point_exists=$(sed -n "/^$next_dir=/p" $ZSH_CUSTOM_ROOT/plugins/DIRECTORY_AND_FILES/warp/.warp_points)
-    if [ -n $warp_point_exists ]; then
+    local warp_point_exists=$(sed -n "/^$1=/p" $ZSH_CUSTOM_ROOT/plugins/DIRECTORY_AND_FILES/warp/.warp_points)
+    if [[ -n $warp_point_exists ]]; then
         ## try to cd to a warp point
         builtin cd "${warp_point_exists#*=}"
-    else                                                          ## illegal cd
-        echoerr "cd: no such directory or warp point: $next_dir"
+    else                                                            ## illegal cd
+        echoerr "cd: no such directory or warp point: $@"
         return 2
     fi
   fi
