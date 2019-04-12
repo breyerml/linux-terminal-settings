@@ -25,6 +25,7 @@ function has_elevated_privileges() {
 ## PLUGINS
 
 declare -a plugins=(
+ccd
 cpu
 dir_tree
 env_vars
@@ -45,7 +46,7 @@ spellchecks
 temperature
 time_and_date
 touch
-warp 
+warp
 )
 
 ### TODO:
