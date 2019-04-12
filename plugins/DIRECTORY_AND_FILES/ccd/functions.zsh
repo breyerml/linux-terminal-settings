@@ -1,7 +1,7 @@
 # title           : ccd/functions.zsh
 # description     : This file provides a function to integrate the warp functionality into cd
 # date            : 2019-04-12
-# dependencies    : -
+# dependencies    : warp.zsh
 # zsh_version     : 5.7.1
 # ====================================================================================
 
