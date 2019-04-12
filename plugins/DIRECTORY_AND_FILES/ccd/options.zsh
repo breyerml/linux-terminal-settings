@@ -6,8 +6,25 @@
 # ====================================================================================
 
 
+# easily read all lines of a file into an array
+zmodload zsh/mapfile
+
 # display group descriptions only for ccd command
-zstyle ':completion:*:*:ccd:*:descriptions' format "%B- %d -%b"
+zstyle ':completion:*:*:ccd:*:descriptions' format $'\e[38;2;235;246;227m\n === %d ===\e[0m'
 
 # use tag names for displaying
 zstyle ':completion:*:*:ccd:*:*' group-name ''
+
+
+# return all warp point names concatenated as RegEx or, e.g. '(foo|bar|baz)'
+function _warp_point_names() {
+  local warp_file_dir="$ZSH_CUSTOM_ROOT/plugins/DIRECTORY_AND_FILES/warp/.warp_points"
+  local string='('
+  for line in "${(f)mapfile[$warp_file_dir]}"; do
+      string+="${line%%=*}|"
+  done
+  echo "${string:0:-1})"
+}
+
+# color warp point names in ccd autocompletion
+zstyle ':completion:*:*:ccd:*:*' list-colors "=$(_warp_point_names)=38;2;181;137;0"
