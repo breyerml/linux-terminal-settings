@@ -1,5 +1,5 @@
-if [[ -z $CUSTOM_ZSH_ROOT ]]; then
-        export CUSTOM_ZSH_ROOT="$( cd "$(dirname "$0")" ; pwd -P )"
+if [[ -z $ZSH_CUSTOM_ROOT ]]; then
+        export ZSH_CUSTOM_ROOT="$( cd "$(dirname "$0")" ; pwd -P )"
 fi
 
 
@@ -25,6 +25,7 @@ function has_elevated_privileges() {
 ## PLUGINS
 
 declare -a plugins=(
+ccd
 cpu
 dir_tree
 env_vars
@@ -45,7 +46,7 @@ spellchecks
 temperature
 time_and_date
 touch
-warp 
+warp
 )
 
 ### TODO:
@@ -55,11 +56,18 @@ setopt NUMERIC_GLOB_SORT
 
 ## source all plugins
 for plugin in $plugins ; do
-    for file in "$CUSTOM_ZSH_ROOT"/plugins/**/"$plugin"/*.zsh ; do
+    for file in "$ZSH_CUSTOM_ROOT"/plugins/**/"$plugin"/*.zsh ; do
         # echo "sourced file: $file"
         source "$file"
     done
 done
+
+# add completions directory to zsh's fpath
+fpath+=($ZSH_CUSTOM_ROOT/completions)
+
+# initialize zsh's completion system
+autoload -U compinit
+compinit -u
 
 
 
@@ -85,3 +93,12 @@ alias rmdir='rmdir -pv '                    # delete all parent directories and 
 function mkcd() { mkdir $1; cd $1 }         # create new directory and cd in it
 function findf() { find $1 -iname $2 }      # find files or directories with a given pattern in a given directory
 function findh() { find . -iname $1 }       # find files or directories in the current directory with a given pattern
+
+# TODO: überarbeiten
+# ==== change directory (cd) ====
+if [ -n "$ZSH_VERSION" ]; then              ## global aliases only defined in ZSH
+    alias -g ...='../..'                    # move two directories up
+    alias -g ....='../../..'                # move three directories up
+    alias -g .....='../../../..'            # move four directories up
+    alias -g ......='../../../../..'        # move five directories up
+fi
