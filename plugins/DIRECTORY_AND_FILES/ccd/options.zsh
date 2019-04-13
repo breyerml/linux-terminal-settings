@@ -10,7 +10,7 @@
 zmodload zsh/mapfile
 
 # display group descriptions only for ccd command
-zstyle ':completion:*:*:ccd:*:descriptions' format $'\e[38;2;235;246;227m\n === %d ===\e[0m'
+zstyle ':completion:*:*:ccd:*:descriptions' format "${SOLARIZED_COLORS[base2]}"$'\n'" === ${FONT[bold]}%d${FONT[normal]} ===$RESET"
 
 # use tag names for displaying
 zstyle ':completion:*:*:ccd:*:*' group-name ''

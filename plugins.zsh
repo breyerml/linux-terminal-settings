@@ -5,6 +5,9 @@ fi
 
 autoload -U parameter zleparameter
 
+# defines colors
+source $ZSH_CUSTOM_ROOT/colors.zsh
+
 
 function echoerr { echo "$@" 1>&2; }
 
