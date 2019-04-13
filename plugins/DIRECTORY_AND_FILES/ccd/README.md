@@ -18,7 +18,7 @@ If that also doesn't succeed, an error is thrown.
 ## Options
 
 Changed zsh's zstyle to integrate warp points in a more satisfying way.
-s
+
 ## Completion
 
 The new `ccd` command can complete directories and warp points.
