@@ -31,6 +31,7 @@ declare -a plugins=(
 ccd
 cpu
 dir_tree
+dot_cd
 env_vars
 file_and_dir_stats
 git
