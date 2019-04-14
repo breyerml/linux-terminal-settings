@@ -1,5 +1,7 @@
 ### List of touched commands
+
 #### 1. aliases.zsh
+
 - `command_exists()`   checks if passed command exists
 - `file_exists()` checks if passed filename exists
 - `has_elevated_privileges` checks if it is possible for the user to gain root rights
@@ -27,6 +29,7 @@
 - `today` display date
 
 ##### 2. directory.zsh
+
 - `ls` list files
 - `la` show all files (including hidden ons; excluding . and ..)
 - `l.` only show hidden files
@@ -47,7 +50,6 @@
 - `....` move three directories up
 - `.....` move four directories up
 - `......` move five directories up
-- `dc` Jump back to a given directory in the current working directory
 - `cpwd` copy current working directory to clipboard
 - `mkdir` make parent directories if needed (nothing otherwise) and print created directories
 - `rmdir` delete all parent directories and print deleted directories
@@ -65,11 +67,9 @@
 - `cd..` `cd ..`
 - `cd-` `cd -`
 - `cd~` `cd ~`
-- `dc..` `dc ..`
-- `dc-` `dc -`
-- `dc~` `dc ~`
 
 ##### 3. hardware.zsh
+
 - `cpu` list cpu infos (short)
 - `cpu-info` list cpu infos (longer)
 - `cpu-temp` display cpu temperatures
@@ -100,3 +100,7 @@
 - `htop` display hardware usage
 - `hs` search for specific command in history
 
+
+for further informations see:
+- [directory README](directory/README.md)
+- [hardware README](hardware/README.md)
