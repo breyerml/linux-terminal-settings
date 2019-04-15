@@ -5,33 +5,23 @@
 # zsh_version     : 5.7.1
 # Based on http://stackoverflow.com/a/41420448/4757
 # Based on https://github.com/parkercoates/dotfiles/blob/master/.zsh/expand-multiple-dots.zsh
-# Based on https://stackoverflow.com/questions/30699242/first-tab-completion-enhancement
 # ====================================================================================
 
 
-# if command line buffer is empty display directories and executables
 # expand multiple dots to parent directories, i.e. `cd ...<TAB>` expands to `cd ../../`
 function dot-expand() {
-  ## if buffer is empty display directories and executables within menu selection
-  if [[ ${#BUFFER} == 0 ]]; then
-    BUFFER="./"
-    CURSOR=2
-    zle list-choices
-  else
-    ## only expand if we are at the start of a line, wright after a space or in the middle of a path
-    if [[ $LBUFFER =~ '(^| |/)\.\.\.+' ]]; then
-      LBUFFER=$LBUFFER:fs%\.\.\.%../..%
-    fi
-
-    if [[ $WIDGET == 'dot-expand-and-expand-or-complete' ]]; then
-      ## if TAB was entered: expand-or-complete command line arguments
-      zle expand-or-complete
-    elif [[ $WIDGET == 'dot-expand-and-accept-line' ]]; then
-      ## if RETURN was entered: accept-line
-      zle accept-line
-    fi
+## only expand if we are at the start of a line, wright after a space or in the middle of a path
+  if [[ $LBUFFER =~ '(^| |/)\.\.\.+' ]]; then
+    LBUFFER=$LBUFFER:fs%\.\.\.%../..%
   fi
 
+  if [[ $WIDGET == 'dot-expand-and-expand-or-complete' ]]; then
+    ## if TAB was entered: expand-or-complete command line arguments
+    zle expand-or-complete
+  elif [[ $WIDGET == 'dot-expand-and-accept-line' ]]; then
+    ## if RETURN was entered: accept-line
+    zle accept-line
+  fi
 }
 
 

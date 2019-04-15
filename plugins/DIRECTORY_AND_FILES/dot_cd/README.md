@@ -16,8 +16,10 @@ It also works in the middle of a path (although writing such paths is useless):
 
 `cd foo/.../bar<TAB>` → `cd foo/../../bar/`
 
-It also show all directories and executables in the current directory (with a menu selection) when pressing `<TAB>` on an empty line.
+
 
 ## Options
 
 Enables `..` as special directory so that `cd ...<TAB>` automatically inserts a slash / at the end producing `cd ../../`.
+
+It also show all directories and executables in the current directory (with a menu selection) when pressing `<TAB>` on an empty line.
