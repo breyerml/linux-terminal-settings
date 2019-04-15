@@ -5,32 +5,38 @@
 # zsh_version     : 5.7.1
 # Based on http://stackoverflow.com/a/41420448/4757
 # Based on https://github.com/parkercoates/dotfiles/blob/master/.zsh/expand-multiple-dots.zsh
+# Based on https://stackoverflow.com/questions/30699242/first-tab-completion-enhancement
 # ====================================================================================
 
 
+# if command line buffer is empty display directories and executables
 # expand multiple dots to parent directories, i.e. `cd ...<TAB>` expands to `cd ../../`
 function dot-expand() {
-  ## only expand if we are at the start of a line, wright after a space or in the middle of a path
-  if [[ $LBUFFER =~ '(^| |/)\.\.\.+' ]]; then
+  ## if buffer is empty display directories and executables within menu selection
+  if [[ ${#BUFFER} == 0 ]]; then
+    BUFFER="./"
+    CURSOR=2
+    zle list-choices
+  else
+    ## only expand if we are at the start of a line, wright after a space or in the middle of a path
+    if [[ $LBUFFER =~ '(^| |/)\.\.\.+' ]]; then
       LBUFFER=$LBUFFER:fs%\.\.\.%../..%
+    fi
+
+    if [[ $WIDGET == 'dot-expand-and-expand-or-complete' ]]; then
+      ## if TAB was entered: expand-or-complete command line arguments
+      zle expand-or-complete
+    elif [[ $WIDGET == 'dot-expand-and-accept-line' ]]; then
+      ## if RETURN was entered: accept-line
+      zle accept-line
+    fi
   fi
+
 }
 
-# create widget for usage with TAB
-function dot-expand-and-expand-or-complete() {
-    zle dot-expand
-    zle expand-or-complete
-}
-
-# create widget for usage with RETURN
-function dot-expand-and-accept-line() {
-    zle dot-expand
-    zle .accept-line
-}
 
 # register widgets in zle and bind them to the specific keys
-zle -N dot-expand
-zle -N dot-expand-and-expand-or-complete
-zle -N dot-expand-and-accept-line
+zle -N dot-expand-and-expand-or-complete dot-expand
+zle -N dot-expand-and-accept-line dot-expand
 bindkey '^I' dot-expand-and-expand-or-complete
 bindkey '^M' dot-expand-and-accept-line

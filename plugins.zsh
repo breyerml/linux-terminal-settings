@@ -97,3 +97,13 @@ alias rmdir='rmdir -pv '                    # delete all parent directories and 
 function mkcd() { mkdir $1; cd $1 }         # create new directory and cd in it
 function findf() { find $1 -iname $2 }      # find files or directories with a given pattern in a given directory
 function findh() { find . -iname $1 }       # find files or directories in the current directory with a given pattern
+
+
+# http://www.zsh.org/mla/users/2016/msg00943.html
+# alias clean='make clean'
+# alias build='make all'
+# alias rebuild='clean;build'
+# zstyle ':completion::*' insert-tab 'pending=1'
+# zstyle ':completion::*:-command-::' tag-order 'aliases:-make:"build\ commands"'
+# zstyle ':completion::*:-command-:*:aliases-make' ignored-patterns '*~(clean|build|rebuild)'
+# zstyle -e ':completion::*:-command-::' tag-order '[[ -f makefile || -f Makefile ]] && reply=("aliases:-make:build\ commands")'
