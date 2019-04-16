@@ -28,10 +28,11 @@ function has_elevated_privileges() {
 ## PLUGINS
 
 declare -a plugins=(
+autocd
 ccd
 cpu
 dir_tree
-dot_cd
+dot_expand
 env_vars
 file_and_dir_stats
 git
@@ -65,6 +66,14 @@ for plugin in $plugins ; do
         source "$file"
     done
 done
+
+
+
+# always group results and list directories first
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-dirs-first true
+
+
 
 # add completions directory to zsh's fpath
 fpath+=($ZSH_CUSTOM_ROOT/completions)
