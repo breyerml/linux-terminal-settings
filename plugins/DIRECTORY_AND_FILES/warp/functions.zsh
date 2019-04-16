@@ -78,7 +78,7 @@ function _warp_force_add() {
         sed -i "/^$1=/d" $_warp_file_dir
         ## append updated warp point after the last line
         echo "$1=$2" >> $_warp_file_dir
-        echo "replaced warp point: $1: ${old_warp_dir#*=} ⇒ $2"
+        echo "replaced warp point: $1: ${warp_point_exists#*=} ⇒ $2"
     fi
 }
 
