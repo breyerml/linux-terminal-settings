@@ -71,7 +71,7 @@ done
 
 # always group results and list directories first
 zstyle ':completion:*' group-name ''
-zstyle ':completion:*' list-dirs-first true
+zstyle ':completion::*:*:*:' list-dirs-first true
 
 
 

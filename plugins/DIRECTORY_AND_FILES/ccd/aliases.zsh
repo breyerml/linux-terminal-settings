@@ -7,4 +7,4 @@
 
 
 # replace normal cd command with the custom one
-alias cd=ccd
+# alias cd=ccd
