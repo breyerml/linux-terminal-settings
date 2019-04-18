@@ -9,34 +9,50 @@
 
 
 # expand multiple dots to parent directories, i.e. `cd ...<TAB>` expands to `cd ../../`
-# TODO: better split (multiple newlines)
-# TODO: check if it has to be expanded (inside '')
-# TODO: only expand actual warp points (not part of other paths)
+# TODO: only expand actual warp points (not part of other paths) -> currently won't work with whitespaces in paths (and '\")
 # TODO: don't expand warp points in warp -a(!) on third position
 function dot-expand() {
-  setopt local_options sh_word_split
-  local -a splitted=( $LBUFFER )
-  unsetopt local_options sh_word_split
+  local MATCHING_STRING=" $LBUFFER"
+  local NEW_LBUFFER=''
   local warp_file_dir="$ZSH_CUSTOM_ROOT/plugins/DIRECTORY_AND_FILES/warp/.warp_points"
+  local is_first=true
+  local is_warp_expand=false
+  while true; do
 
-  for token in $splitted; do
-    local warp_point="${token}"
-    ## remove leading whitespace characters from the path
-    warp_point="${warp_point#"${warp_point%%[![:space:]]*}"}"
-    ## remove trailing whitespace characters from the path
-    warp_point="${warp_point%"${warp_point##*[![:space:]]}"}"
+    if [[ ${MATCHING_STRING} =~ '(.*)[[:space:]]+(.*)' ]]; then
+      # echo "CURRENT_MATCHED: |${match[2]}|"
+      # echo "NEXT_MATCHED: |${match[1]}|"
+      if ! [[ ${match[2]} =~ '/' ]]; then
+        local warp_point_exists=$(sed -n "/^${match[2]}=/p" $warp_file_dir)
+        if [[ -n $warp_point_exists ]]; then
+          local single_quotes="${match[1]//[!\']/}"
+          local single_count="${#single_quotes}"
+          local double_quotes="${match[1]//[!\"]/}"
+          local double_count="${#double_quotes}"
+          if (( single_count % 2 == 0 && double_count % 2 == 0 )); then
+            match[2]=${warp_point_exists#*=}
+            if [[ $is_first == true ]]; then
+              is_warp_expand=true
+            fi
+          fi
 
-    if ! [[ $warp_point =~ '/' ]]; then
-      local warp_file_dir="$ZSH_CUSTOM_ROOT/plugins/DIRECTORY_AND_FILES/warp/.warp_points"
-      local warp_point_exists=$(sed -n "/^$warp_point=/p" $warp_file_dir)
-      if [[ -n $warp_point_exists ]]; then
-        LBUFFER=${LBUFFER//$warp_point/${warp_point_exists#*=}}
-        if [[ $token == ${splitted[-1]} ]]; then
-          zle backward-char
         fi
       fi
+      if [[ -n ${match[2]} ]]; then
+        is_first=false
+      fi
+      NEW_LBUFFER=" ${match[2]}$NEW_LBUFFER"
+      MATCHING_STRING="${match[1]}"
+    else
+      break
     fi
+
   done
+
+  LBUFFER="${NEW_LBUFFER:1}"
+  if [[ $is_warp_expand == true ]]; then
+    zle backward-char
+  fi
 
   ## only expand if we are at the start of a line, wright after a space or in the middle of a path
   if [[ $LBUFFER =~ '(^| |/)\.\.\.+' ]]; then

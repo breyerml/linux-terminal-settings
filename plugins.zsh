@@ -51,6 +51,7 @@ temperature
 time_and_date
 touch
 warp
+warp_expand
 )
 
 ### TODO:
