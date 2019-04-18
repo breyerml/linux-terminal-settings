@@ -69,11 +69,6 @@ done
 
 
 
-# always group results and list directories first
-zstyle ':completion:*' group-name ''
-zstyle ':completion::*:*:*:' list-dirs-first true
-
-
 
 # add completions directory to zsh's fpath
 fpath+=($ZSH_CUSTOM_ROOT/completions)

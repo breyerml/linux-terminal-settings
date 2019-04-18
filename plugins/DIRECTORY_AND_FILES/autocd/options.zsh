@@ -24,8 +24,12 @@ function _warp_point_names() {
   fi
 }
 
+
 # enable cd'ing without the need to type cd
 setopt autocd
+
+# changes tags -> doesn't work if false :D
+zstyle ':completion::*:*:*:' list-dirs-first true
 
 # don't print a TAB when entered on an empty command line
 zstyle ':completion::*' insert-tab 'pending=1'
@@ -40,32 +44,35 @@ zstyle ':completion::*:-command-::' file-patterns \
 zstyle -e ':completion::*:-command-::' tag-order \
 '
     if [[ -z $PREFIX$SUFFIX ]]; then
-      reply=( "local-directories:-normal local-directories:-warp:warp\ point" - )
+      reply=( "local-directories local-directories:-warp:warp\ point" - )
     elif [[ $PREFIX$SUFFIX =~ ^./ ]]; then
       reply=( executables:Executables:Executables - )
     else
       reply=( )
     fi
 '
-# TODO: mkdir
+
 # first try directories and then all globbed-files as Tags
 zstyle ':completion::*:*:*:' tag-order \
-  'local-directories:-normal
+  'local-directories
+   directories
    local-directories:-warp:warp\ point
-   globbed-files:-normal
-   globbed-files:-warp:warp\point'
+   directories:-warp:warp\ point
+'
 
-# add warp points to the completions
-zstyle ':completion::*:*:*:(local-directories-warp|globbed-files-warp)' fake-always $(_warp_point_names space-separated)
-zstyle ':completion::*:*:*:(local-directories-warp|globbed-files-warp)' ignored-patterns '*~$(_warp_point_names pipe-separated)'
+# fill new tags just with the currently existing warp points
+zstyle ':completion::*:*:*:(local-directories-warp|directories-warp)' ignored-patterns '*'
+zstyle ':completion::*:*:*:(local-directories-warp|directories-warp)' fake-always $(_warp_point_names space-separated)
+
+# show all warp points at the bottom of the completion list
+zstyle ':completion::*:*:*:(local-directories-warp|directories-warp)' group-name ''
+
 
 # add description to warp points on an empty line
-zstyle -e ':completion::*:*:*:(local-directories-warp|globbed-files-warp)' format '
-if [[ -z $PREFIX$SUFFIX ]]; then
+zstyle -e ':completion::*:*:*:(local-directories-warp|directories-warp)' format '
   reply=( "${SOLARIZED_COLORS[base2]}
  === ${FONT[bold]}%d${FONT[normal]} ===$RESET" )
-fi
 '
 
 # color warp points
-zstyle ':completion::*:*:*:(local-directories-warp|globbed-files-warp)' list-colors "=$(_warp_point_names pipe-separated)=38;2;181;137;0"
+zstyle ':completion::*:*:*:(local-directories-warp|directories-warp)' list-colors "=$(_warp_point_names pipe-separated)=38;2;181;137;0"
