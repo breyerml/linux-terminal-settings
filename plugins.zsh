@@ -29,7 +29,6 @@ function has_elevated_privileges() {
 
 declare -a plugins=(
 autocd
-ccd
 cpu
 dir_tree
 dot_expand
