@@ -5,6 +5,8 @@
 # zsh_version     : 5.7.1
 # ====================================================================================
 
+
+# TODO: split
 # easily read all lines of a file into an array
 zmodload zsh/mapfile
 
