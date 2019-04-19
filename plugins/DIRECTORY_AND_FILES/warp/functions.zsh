@@ -10,11 +10,10 @@
 zmodload zsh/mapfile
 
 # if not existing: create new warp_file to store existing warp_points
-local _warp_file_dir="$( cd "$(dirname "$0")" ; pwd -P )/.warp_points"
-if ! file_exists $_warp_file_dir ; then
-    touch $_warp_file_dir
+export ZSH_WARP_FILE_DIR="$( cd "$(dirname "$0")" ; pwd -P )/.warp_points"
+if ! file_exists $ZSH_WARP_FILE_DIR ; then
+    touch $ZSH_WARP_FILE_DIR
 fi
-
 
 # check whether the warp point name is legal
 function _warp_check_illegal_name() {
@@ -53,7 +52,7 @@ function _warp_check_absolute_path() {
 
 # add a new warp point if the name isn't taken yet and if it is a directory
 function _warp_add() {
-    local warp_point_exists=$(sed -n "/^$1=/p" $_warp_file_dir)
+    local warp_point_exists=$(sed -n "/^$1=/p" $ZSH_WARP_FILE_DIR)
     ## check whether the given warp point name already exists
     if [[ -z $warp_point_exists ]]; then
         ## append new warp point after the last line
@@ -67,28 +66,28 @@ function _warp_add() {
 
 # add a new warp point or replace an already existing one
 function _warp_force_add() {
-    local warp_point_exists=$(sed -n "/^$1=/p" $_warp_file_dir)
+    local warp_point_exists=$(sed -n "/^$1=/p" $ZSH_WARP_FILE_DIR)
     ## check whether the given warp point name already exists
     if [[ -z $warp_point_exists ]]; then
         ## append new warp point after the last line
-        echo "$1=$2" >> $_warp_file_dir
+        echo "$1=$2" >> $ZSH_WARP_FILE_DIR
         echo "warp point added: $1 → $2"
     else
         ## remove old warp point if neccessary
-        sed -i "/^$1=/d" $_warp_file_dir
+        sed -i "/^$1=/d" $ZSH_WARP_FILE_DIR
         ## append updated warp point after the last line
-        echo "$1=$2" >> $_warp_file_dir
+        echo "$1=$2" >> $ZSH_WARP_FILE_DIR
         echo "replaced warp point: $1: ${old_warp_dir#*=} ⇒ $2"
     fi
 }
 
 # remove the given warp point (if possible)
 function _warp_remove() {
-    local warp_point_exists=$(sed -n "/^$1=/p" $_warp_file_dir)
+    local warp_point_exists=$(sed -n "/^$1=/p" $ZSH_WARP_FILE_DIR)
     ## check whether the given warp point name exists
     if [[ -n $warp_point_exists ]]; then
        ## remove warp point
-       sed -i "/^$1=/d" $_warp_file_dir
+       sed -i "/^$1=/d" $ZSH_WARP_FILE_DIR
        echo "warp point removed: ${warp_point_exists/=/ → }"
     else
        echoerr "warp: $1 doesn't exist (use -l or --list to list all available warp points)"
@@ -99,13 +98,13 @@ function _warp_remove() {
 # remove all invalid warp points
 function _warp_clean() {
     ## loop over all warp points
-    for line in "${(f)mapfile[$_warp_file_dir]}"; do
+    for line in "${(f)mapfile[$ZSH_WARP_FILE_DIR]}"; do
         ## don't try to clean an empty line
         [[ ! $line =~ '[:space:]+' ]] && continue
         ## check whether warp point directory still exists
         if ! [[ -d "${line#*=}" ]]; then
             ## remove warp point if directory is now invalid
-            sed -i "\|$line|d" $_warp_file_dir
+            sed -i "\|$line|d" $ZSH_WARP_FILE_DIR
             echo "removed invalid warp point: ${line/=/ → }"
         fi
     done
@@ -113,7 +112,7 @@ function _warp_clean() {
 
 # list all warp points
 function _warp_list() {
-    sed 's/=/ → /g' $_warp_file_dir
+    sed 's/=/ → /g' $ZSH_WARP_FILE_DIR
 }
 
 # display help option
@@ -140,7 +139,7 @@ EOF
 
 # try to warp
 function _warp_to_point() {
-  local warp_point_exists=$(sed -n "/^$1=/p" $_warp_file_dir)
+  local warp_point_exists=$(sed -n "/^$1=/p" $ZSH_WARP_FILE_DIR)
   ## check whether the given warp point name exists
   if [[ -n $warp_point_exists ]]; then
     ## try to change to the directory saved in the given warp point

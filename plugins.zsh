@@ -51,7 +51,6 @@ temperature
 time_and_date
 touch
 warp
-warp_expand
 )
 
 ### TODO:
@@ -68,6 +67,8 @@ for plugin in $plugins ; do
 done
 
 
+# bind custom widgets (if loaded) to keys
+source $ZSH_CUSTOM_ROOT/binding_widgets.zsh
 
 
 # add completions directory to zsh's fpath
