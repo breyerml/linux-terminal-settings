@@ -4,6 +4,10 @@
 
 This plugin provides a way to directly change to marked directories.
 
+## Aliases
+
+To enable `warp -?` warp is always called with the noglob option.
+
 ## Functions
 
 One function is provided: `warp`

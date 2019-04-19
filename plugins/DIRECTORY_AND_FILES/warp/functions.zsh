@@ -1,6 +1,6 @@
 # title           : warp/functions.zsh
 # description     : This file provides a function to directly cd to directories and helper functions to achiev this.
-# date            : 2019-03-30
+# date            : 2019-04-20
 # dependencies    : -
 # zsh_version     : 5.7.1
 # ====================================================================================
@@ -18,8 +18,10 @@ fi
 # check whether the warp point name is legal
 function _warp_check_illegal_name() {
     if [[ $1 =~ '^[A-Za-z0-9_-]*$' ]]; then
+        ## correct warp point name
         return 0
     else
+        ## illegal characters in warp point name
         echoerr "warp: illegal name: $1 (correct: [A-Za-z0-9_-])"
         return 22
     fi
@@ -52,9 +54,9 @@ function _warp_check_absolute_path() {
 
 # add a new warp point if the name isn't taken yet and if it is a directory
 function _warp_add() {
-    local warp_point_exists=$(sed -n "/^$1=/p" $ZSH_WARP_FILE_DIR)
+    local warp_point=$(command egrep "^$1=" $ZSH_WARP_FILE_DIR)
     ## check whether the given warp point name already exists
-    if [[ -z $warp_point_exists ]]; then
+    if [[ -z $warp_point ]]; then
         ## append new warp point after the last line
         echo "$1=$2" >> $_warp_file_dir
         echo "warp point added: $1 → $2"
@@ -66,9 +68,9 @@ function _warp_add() {
 
 # add a new warp point or replace an already existing one
 function _warp_force_add() {
-    local warp_point_exists=$(sed -n "/^$1=/p" $ZSH_WARP_FILE_DIR)
+    local warp_point=$(command egrep "^$1=" $ZSH_WARP_FILE_DIR)
     ## check whether the given warp point name already exists
-    if [[ -z $warp_point_exists ]]; then
+    if [[ -z $warp_point ]]; then
         ## append new warp point after the last line
         echo "$1=$2" >> $ZSH_WARP_FILE_DIR
         echo "warp point added: $1 → $2"
@@ -83,12 +85,12 @@ function _warp_force_add() {
 
 # remove the given warp point (if possible)
 function _warp_remove() {
-    local warp_point_exists=$(sed -n "/^$1=/p" $ZSH_WARP_FILE_DIR)
+    local warp_point=$(command egrep "^$1=" $ZSH_WARP_FILE_DIR)
     ## check whether the given warp point name exists
-    if [[ -n $warp_point_exists ]]; then
+    if [[ -n $warp_point ]]; then
        ## remove warp point
        sed -i "/^$1=/d" $ZSH_WARP_FILE_DIR
-       echo "warp point removed: ${warp_point_exists/=/ → }"
+       echo "warp point removed: ${warp_point/=/ → }"
     else
        echoerr "warp: $1 doesn't exist (use -l or --list to list all available warp points)"
        return 2
@@ -112,7 +114,8 @@ function _warp_clean() {
 
 # list all warp points
 function _warp_list() {
-    sed 's/=/ → /g' $ZSH_WARP_FILE_DIR
+    ## replace the first occurrence of = in each line with an arrow for prettier output
+    sed 's/=/ → /g' "$ZSH_WARP_FILE_DIR"
 }
 
 # display help option
@@ -120,13 +123,13 @@ function _warp_help() {
     cat <<- EOF
 Usage: warp [option] [warp point name] [warp point target]
 Options:
-    -a,  --add        add a new warp point to the given directory with the specified name
-    -!,  --add!       add a new warp point to the given directory with the specified name
-                      overrides existing warp point if necessary
-    -rm, --remove     removes an existing warp point
-    -c,  --clean      remove all unused warp points
-    -l,  --list       lists all warp points
-    -h,  --help       display help message
+    -a,     --add        add a new warp point to the given directory with the specified name
+    -!,     --add!       add a new warp point to the given directory with the specified name
+                         overrides existing warp point if necessary
+    -rm,    --remove     removes an existing warp point
+    -c,     --clean      remove all unused warp points
+    -l,     --list       lists all warp points
+    -h, -?  --help       display help message
 Return Codes:
     1       illegal option
     2       warp point doesn't exist
@@ -139,14 +142,14 @@ EOF
 
 # try to warp
 function _warp_to_point() {
-  local warp_point_exists=$(sed -n "/^$1=/p" $ZSH_WARP_FILE_DIR)
+  local warp_point=$(command egrep "^$1=" $ZSH_WARP_FILE_DIR)
   ## check whether the given warp point name exists
-  if [[ -n $warp_point_exists ]]; then
+  if [[ -n $warp_point ]]; then
     ## try to change to the directory saved in the given warp point
-    builtin cd "${warp_point_exists#*=}" >/dev/null 2>&1
+    builtin cd "${warp_point#*=}" >/dev/null 2>&1
     ## warp point target doesn't exist anymore
     if [[ $? != 0 ]]; then
-      echoerr "warp: no such directory: ${warp_point_exists#*=}"
+      echoerr "warp: no such directory: ${warp_point#*=}"
     fi
   else
     ## no warp point was given
@@ -181,7 +184,7 @@ function warp() {
         ;;
         ('--add!'|'-!')
             ## if no directory is given use current working directory
-            if [[ $# == 1 ]]; then
+            if [[ $# == 1 || $2 == '.' ]]; then
                 set $1 $PWD
             fi
             ## add a new warp point or replace an already existing one
@@ -204,13 +207,15 @@ function warp() {
             ## list all warp points
             _warp_check_parameter_count 0 $# && _warp_list "$@"
         ;;
-        ('--help'|'-h')
+        ('--help'|'-h'|'-?')
             ## display help information
             _warp_check_parameter_count 0 $# && _warp_help "$@"
         ;;
         (*)
             ## try to cd to the given warp point target
-            _warp_check_parameter_count 0 $# && _warp_to_point "$option"
+            _warp_check_parameter_count 0 $# && \
+            _warp_check_illegal_name "$option" && \
+            _warp_to_point "$option"
         ;;
     esac
 }

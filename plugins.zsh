@@ -89,6 +89,8 @@ compinit -u
 # ==== others ====
 alias sudo='sudo '
 alias bc='bc -ql'                           # don't print bc welcome and use math library
+# be able to type URLs containing ? as arguments to wget
+alias wget='noglob wget'
 alias wget='wget -c'                        # continue wget in case of error
 
 alias diff='colordiff'                      # always diff with colors

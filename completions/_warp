@@ -22,6 +22,7 @@ _warp() {
               '(-)-l[list all warp points]' \
               '(-)--list[list all warp points]' \
               '(-)-h[display help message]' \
+              '(-)-?[display help message]' \
               '(-)--help[display help message]' && ret=0
         else
           ## complete warp points

@@ -10,7 +10,7 @@
 # TODO: only expand actual warp points (not part of other paths) -> currently won't work with whitespaces in paths (and '\")
 function warp-expand() {
   ## don't expand warp points when creating or removing them while using the warp command
-  if ! [[ $LBUFFER =~ '(^|(.*)&& )warp ' ]]; then
+  if ! [[ $LBUFFER =~ '(^|&& )warp ' ]]; then
     ## prepend a whitespace to be able to match the first part of the LBUFFER
     local MATCHING_STRING=" $LBUFFER"
     ## the NEW_BUFFER holds the result after potential expandings
@@ -23,12 +23,13 @@ function warp-expand() {
     while true; do
       ## greedy match until the last whitespace
       if [[ ${MATCHING_STRING} =~ '(.*)[[:space:]]+(.*)' ]]; then
-        ## the match must not conatin a slash or it breaks the sed command
-        ## (not a problem since slashes are forbidden in warp point names)
-        if ! [[ ${match[2]} =~ '/' || ${match[2]} =~ '\.\.\.+' ]]; then
+        ## the match must not conatin any dot (or it breaks the egrep pattern)
+        ## (not a problem since dots are forbidden in warp point names)
+        if ! [[ ${match[2]} =~ '\.+' ]]; then
           ## try to find a warp point with the name given by the current token
-          local warp_point_exists=$(sed -n "/^${match[2]}=/p" $ZSH_WARP_FILE_DIR) # TODO: sed nervt
-          if [[ -n $warp_point_exists ]]; then
+          local warp_point=$(command egrep "^${match[2]}=" $ZSH_WARP_FILE_DIR)
+          # echo "$warp_point"
+          if [[ -n $warp_point ]]; then
             ## count the number of single quotes (') on the left side
             local single_quotes="${match[1]//[!\']/}"
             local single_count="${#single_quotes}"
@@ -39,7 +40,7 @@ function warp-expand() {
             ## -> doesn't work with pathes containing an odd number of quotes
             if (( single_count % 2 == 0 && double_count % 2 == 0 )); then
               ## expand warp point
-              match[2]=${warp_point_exists#*=}
+              match[2]=${warp_point#*=}
               ## if the first match (the one located most right) is a warp expansion
               if [[ $is_first == true ]]; then
                 is_warp_expansion=true
