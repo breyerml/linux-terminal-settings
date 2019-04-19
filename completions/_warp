@@ -25,26 +25,24 @@ _warp() {
               '(-)--help[display help message]' && ret=0
         else
           ## complete warp points
-          local warp_file_dir="$ZSH_CUSTOM_ROOT/plugins/DIRECTORY_AND_FILES/warp/.warp_points"
           local -a warp_points
-           for line in "${(f)mapfile[$warp_file_dir]}"; do
+           for line in "${(f)mapfile[$ZSH_WARP_FILE_DIR]}"; do
               warp_points+=(${line%%=*})
           done
           _alternative "wp:warp points:($warp_points)" && ret=0
         fi
     elif (( $CURRENT == 3 )); then
-        if [[ ${words[2]} =~ '^(--remove|-rm)$' ]]; then
+        if [[ ${words[2]} =~ '^(--remove|-rm|--add!|-!)$' ]]; then
             ## complete existing warp points for removing
-            local warp_file_dir="$ZSH_CUSTOM_ROOT/plugins/DIRECTORY_AND_FILES/warp/.warp_points"
             local -a warp_points
-             for line in "${(f)mapfile[$warp_file_dir]}"; do
+             for line in "${(f)mapfile[$ZSH_WARP_FILE_DIR]}"; do
                 warp_points+=(${line%%=*})
             done
             _alternative "wp:warp points:($warp_points)" && ret=0
         fi
     elif (( $CURRENT == 4 )); then
         ## complete directories as warp point target
-        if [[ ${words[2]} =~ '^(--add|-a|--add!|-!)$' ]]; then
+        if [[ ${words[2]} =~ '^(--add|-a|--add!|-!)' ]]; then
             _path_files -/ && ret=0
         fi
     fi
