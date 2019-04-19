@@ -79,7 +79,7 @@ function _warp_force_add() {
         sed -i "/^$1=/d" $ZSH_WARP_FILE_DIR
         ## append updated warp point after the last line
         echo "$1=$2" >> $ZSH_WARP_FILE_DIR
-        echo "replaced warp point: $1: ${old_warp_dir#*=} ⇒ $2"
+        echo "replaced warp point: $1: ${warp_point#*=} ⇒ $2"
     fi
 }
 
