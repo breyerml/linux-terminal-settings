@@ -28,17 +28,22 @@ function has_elevated_privileges() {
 ## PLUGINS
 
 declare -a plugins=(
-autocd
+dot_expand
+ls
+warp
+)
+
+# experimental
+# autocd
+plugins+=(
 cpu
 dir_tree
-dot_expand
 env_vars
 file_and_dir_stats
 git
 gpu
 grep
 history
-ls
 memory
 network
 pager
@@ -50,7 +55,6 @@ spellchecks
 temperature
 time_and_date
 touch
-warp
 )
 
 ### TODO:
