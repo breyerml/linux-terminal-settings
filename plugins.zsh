@@ -27,6 +27,7 @@ function has_elevated_privileges() {
 
 ## PLUGINS
 
+# autocd
 declare -a plugins=(
 dot_expand
 ls
@@ -34,7 +35,6 @@ warp
 )
 
 # experimental
-# autocd
 plugins+=(
 cpu
 dir_tree

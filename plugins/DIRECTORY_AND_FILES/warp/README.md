@@ -34,3 +34,15 @@ Usage:
 ## Completion
 
 The new `warp` command can complete all options and existing warp points.
+
+## Widgets
+
+A widget to expand warp point names to their directory. Default bind to `TAB` and `RETURN`.
+
+Usage
+
+`$ cd wp<TAB>` <br />
+→ expands to `cd ~/Documents/foo/bar`
+
+`$ echo 'Thats a wp test'<TAB>` <br />
+→ won't expand since the warp point name 'wp' is quoted

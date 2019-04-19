@@ -1,4 +1,4 @@
-# Expansion of multiple dots
+# Better autocd
 
 ## Description
 
