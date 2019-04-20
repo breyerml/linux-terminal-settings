@@ -58,7 +58,7 @@ function _warp_add() {
     ## check whether the given warp point name already exists
     if [[ -z $warp_point ]]; then
         ## append new warp point after the last line
-        echo "$1=$2" >> $_warp_file_dir
+        echo "$1=$2" >> $ZSH_WARP_FILE_DIR
         echo "warp point added: $1 → $2"
     else
         echoerr "warp: $1 already added (use -! or --add! to override)"
