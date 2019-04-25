@@ -17,7 +17,7 @@ fi
 
 # check whether the warp point name is legal
 function _warp_check_illegal_name() {
-    if [[ $1 =~ '^[A-Za-z0-9_-]*$' ]]; then
+    if [[ $1 =~ '^[[:alnum:]_-]+$' ]]; then
         ## correct warp point name
         return 0
     else

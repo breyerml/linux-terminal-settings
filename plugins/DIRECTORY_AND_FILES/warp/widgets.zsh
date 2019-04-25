@@ -25,7 +25,7 @@ function warp-expand() {
       if [[ ${MATCHING_STRING} =~ '(.*)[[:space:]]+(.*)' ]]; then
         ## the match must not conatin any dot (or it breaks the egrep pattern)
         ## (not a problem since dots are forbidden in warp point names)
-        if ! [[ ${match[2]} =~ '[.*|]+' ]]; then
+        if [[ ${match[2]} =~ '^[[:alnum:]_-]+$' ]]; then
           ## try to find a warp point with the name given by the current token
           local warp_point=$(command egrep "^${match[2]}=" $ZSH_WARP_FILE_DIR)
           # echo "$warp_point"
