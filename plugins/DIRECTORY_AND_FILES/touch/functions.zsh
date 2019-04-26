@@ -1,35 +1,42 @@
-# ==== touch with template support ====
+# title           : touch/functions.zsh
+# description     : This file provides a function to create new files based on the templates in ~/Templates/.
+# date            : 2019-04-26
+# dependencies    : -
+# zsh_version     : 5.7.1
+# ====================================================================================
+
+
+# touch with template support
 function toucht() {
-    for file in "$@"; do                              ## support multiple files at once
-        ## search for all templates in ~/Tempplates matching the specific filename extension
-        local templates=$(find ~/Templates -type f -iname "*.${file##*.}")
+  ## support multiple files at once
+  for file in "$@"; do
+    ## search for all templates in ~/Tempplates matching the specific filename extension
+    local -a templates=( $(find ~/Templates -type f -iname "*.${file##*.}") )
 
-        ## fill array with possible matching templates found in ~/Templates
-        declare -a array
-        while read -r templates; do
-            array+=($templates)
-        done <<< "$templates"
-
-        if [[ ${#array[@]} == 0 ]]; then              ## no template provided -> use default touch
-            touch $file
-        elif [[ ${#array[@]} == 1 ]]; then            ## use the provided template
-            \cp ${array[1]} $file
-        else                                          ## select one of the provided templates
-            ## print the selection dialog containing all matched templates and wait for the user input
-            echo "Please select one of the following templates (${#array[@]}):\n"
-            for (( i=0; i<${#array[@]}; i++ )); do
-                echo "  [$i] $(basename ${array[$i+1]})"
-            done
-            echo "\nYour choice: \c"
-            read choice
-            ## check if the user input is a correct choice
-            ## i.e. it is a valid number less then the number of possible templates
-            if [[ $choice =~ ^[0-9]+$ && $choice -lt ${#array[@]} ]]; then
-                \cp ${array[$choice+1]} $file
-            else
-                echo "Illegal choice!"
-                return 1
-            fi
-        fi
-    done
+    ## check how many matching templates were found
+    if [[ ${#templates[@]} == 0 ]]; then
+      ## no matching template found -> use default touch
+      touch $file
+    elif [[ ${#templates[@]} == 1 ]]; then
+      ## exactly one matching template found -> use the provided template
+      command cp "${templates[1]}" "$file"
+    else
+      ## select one of the provided templates
+      ## -> print the selection dialog containing all matched templates and wait for the user input
+      echo "Please select one of the following ${#templates[@]} templates:\n"
+      for (( i=0; i<${#templates[@]}; i++ )); do
+        echo "  [$i] $(basename ${templates[i+1]})"
+      done
+      vared -p $'\nYour choice: ' -c choice
+      ## check if the user input is a correct choice
+      ## i.e. it is a valid number less than the number of matched templates
+      if [[ $choice =~ ^[0-9]+$ && $choice -lt ${#templates[@]} ]]; then
+        command cp "${templates[$choice+1]}" "$file"
+      else
+        ## ilegal user input -> don't create anything
+        echoerr "$0: Illegal choice!"
+        return 22
+      fi
+    fi
+  done
 }

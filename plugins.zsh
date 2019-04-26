@@ -31,6 +31,7 @@ function has_elevated_privileges() {
 declare -a plugins=(
 dot_expand
 ls
+touch
 warp
 )
 
@@ -54,7 +55,6 @@ safety
 spellchecks
 temperature
 time_and_date
-touch
 )
 
 ### TODO:
