@@ -1,62 +1,43 @@
-### List of touched commands
+# List of plugins
 
-#### 1. aliases.zsh
+### autocd ([README](plugins/DIRECTORY_AND_FILES/autocd/README.md))
+On an empty command line if `<TAB>` is pressed, all directories will be suggested (for better zsh autocd).
 
-- `command_exists()`   checks if passed command exists
-- `file_exists()` checks if passed filename exists
-- `has_elevated_privileges` checks if it is possible for the user to gain root rights
-- `grep`  command-line utility for searching plain-text data sets
-- `egrep` extended grep
-- `fgrep` fixed string grep
-- `rgrep` recursive grep
-- `gits` show git status message
-- `gitd` show git difference
-- `gitc` commit staged changes
-- `gita` add all untracked and/or changed files
-- `gitac` add all untracked and/or changed files and commit them
-- `gitl` show log as graph with abbreviated commit ids
-- `bc` a math library
-- `wget` continue wget in case of error
-- `chown` change owner
-- `chmod` change mode
-- `chgrp` change group
-- `path` list all PATH variables
-- `manpath` list all MAN_PATH variables
-- `ld_library_path` list all LD_LIBRARY_PATH variables
-- `pkg_config_path` list all PKG_CONFIG_PATH variables
-- `diff` 
-- `goodnight` shutdown the computer
-- `today` display date
+In addition pressing `<TAB>` on a command line only containing `./` will suggest only files marked with the executable flag.
 
-##### 2. directory.zsh
+ATTENTION: this is per default enabled if the `warp` plugin is loaded. In this case, the `autocd` plugin shall not be loaded in addition.
 
-- `ls` list files
-- `la` show all files (including hidden ons; excluding . and ..)
-- `l.` only show hidden files
-- `l` list all files with details
-- `ll` list non-hidden files with details
-- `lp` list non-hidden files with full path
-- `lr` list non-hidden files recursively
-- `lc` count all non-hidden files
-- `lac` count all files
-- `lf` find all files with the given pattern
-- `lt` list all files sorted by time (newest first)
-- `ltr` list all files sorted by time (oldest first)
-- `lss` list all files sorted by size (biggest first)
-- `lssr` list all files sorted by size (smallest first)
+### dot_expand ([README](plugins/DIRECTORY_AND_FILES/dot_expand/README.md))
+`cd` up in the directory stack using multiple dots (multiple dots will get expanded if not enclosed in quotes).
+
+### ls ([README](plugins/DIRECTORY_AND_FILES/ls/README.md))
+Various aliases and functions are provided for the `ls` command.
+
+It uses dircolors to change the `LS_COLORS` variable. If [vivid](https://github.com/sharkdp/vivid) is installed it uses this instead. The default color scheme is based on the [solarized color scheme](https://en.wikipedia.org/wiki/Solarized_(color_scheme)).
+
+### touch ([README](plugins/DIRECTORY_AND_FILES/touch/README.md))
+The command `toucht` is provided that uses templates provided in `~/Templates` on creation of a new file (if possible).
+
+### warp ([README](plugins/DIRECTORY_AND_FILES/warp/README.md))
+Command to manage so called 'warp points' (i.e. shortcuts) to a specific directory.
+
+Warp points can be created, overwritten, removed, listed and cleaned. If the new `warp` command gets a single correct warp point as argument, `cd` is invoked with the corresponding directory path.
+
+Additionally the completion system is tweaked: on every completion of a directory all warp points are suggested too. On pressing `<TAB>` or `<RETURN>` all warp points will get expanded to their corresponding directory path.
+
+This plugins also automatically enables everything related to the `autocd` plugin.
+
+
+## Experimental
+
 - `dirtree` show non-hidden directories in tree format
 - `filetree` show non-hidden directories and files with their corresponding size
-- `...` move two directories up
-- `....` move three directories up
-- `.....` move four directories up
-- `......` move five directories up
 - `cpwd` copy current working directory to clipboard
 - `mkdir` make parent directories if needed (nothing otherwise) and print created directories
 - `rmdir` delete all parent directories and print deleted directories
 - `mkcd` create new directory and cd in it
 - `findf` find files or directories with a given pattern in a given directory
 - `findh` find files or directories in the current directory with a given pattern
-- `toucht` touch with template support
 - `pstat` show statistics for a file
 - `duc` list all non-hidden file sizes human-readable in descending order
 - `dua` list all file sizes human-readable in descending order
@@ -67,8 +48,6 @@
 - `cd..` `cd ..`
 - `cd-` `cd -`
 - `cd~` `cd ~`
-
-##### 3. hardware.zsh
 
 - `cpu` list cpu infos (short)
 - `cpu-info` list cpu infos (longer)
@@ -99,8 +78,3 @@
 - `pscpu` get top 10 process eating cpu
 - `htop` display hardware usage
 - `hs` search for specific command in history
-
-
-for further informations see:
-- [directory README](directory/README.md)
-- [hardware README](hardware/README.md)
