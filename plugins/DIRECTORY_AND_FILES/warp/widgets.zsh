@@ -1,6 +1,6 @@
 # title           : warp/widgets.zsh
 # description     : This file provides a widget to expand warp points
-# date            : 2019-04-19
+# date            : 2019-04-26
 # dependencies    : -
 # zsh_version     : 5.7.1
 # ====================================================================================

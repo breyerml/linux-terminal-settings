@@ -1,6 +1,6 @@
 # title           : warp/functions.zsh
 # description     : This file provides a function to directly cd to directories and helper functions to achiev this.
-# date            : 2019-04-20
+# date            : 2019-04-26
 # dependencies    : -
 # zsh_version     : 5.7.1
 # ====================================================================================

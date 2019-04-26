@@ -1,6 +1,6 @@
 # title           : warp/options.zsh
 # description     : This file provides autosuggestions for warp points on every directory completing command and better autocd support
-# date            : 2019-04-19
+# date            : 2019-04-26
 # dependencies    : -
 # zsh_version     : 5.7.1
 # ====================================================================================
