@@ -20,7 +20,8 @@ article.tex  beamer.tex
 $ toucht foo.txt    # Creates a new empty txt-file using touch
 $ toucht bar.cpp    # Creates a new file with the content of the template file "cpp_source.cpp" using 'cp'
 $ toucht baz.tex    # The user has to choose the correct template file from a selection dialog
-Please select one of the following 2 templates:
+
+Please select one of the following 2 templates for 'baz.tex':
 
   [0] beamer.tex
   [1] article.tex

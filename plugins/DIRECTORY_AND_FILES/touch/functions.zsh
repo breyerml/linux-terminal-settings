@@ -23,11 +23,12 @@ function toucht() {
     else
       ## select one of the provided templates
       ## -> print the selection dialog containing all matched templates and wait for the user input
-      echo "Please select one of the following ${#templates[@]} templates:\n"
+      echo "\nPlease select one of the following ${#templates[@]} templates for '$file':\n"
       for (( i=0; i<${#templates[@]}; i++ )); do
         echo "  [$i] $(basename ${templates[i+1]})"
       done
-      vared -p $'\nYour choice: ' -c choice
+      local choice=''
+      vared -p $'\nYour choice: ' choice
       ## check if the user input is a correct choice
       ## i.e. it is a valid number less than the number of matched templates
       if [[ $choice =~ ^[0-9]+$ && $choice -lt ${#templates[@]} ]]; then
