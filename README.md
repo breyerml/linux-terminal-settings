@@ -5,7 +5,7 @@ On an empty command line if `<TAB>` is pressed, all directories will be suggeste
 
 In addition pressing `<TAB>` on a command line only containing `./` will suggest only files marked with the executable flag.
 
-ATTENTION: this is per default enabled if the `warp` plugin is loaded. In this case, the `autocd` plugin shall not be loaded in addition.
+ATTENTION: this plugin is per default enabled, if the `warp` plugin is loaded. In this case, the `autocd` plugin shall not be loaded additionally.
 
 ### dot_expand ([README](plugins/DIRECTORY_AND_FILES/dot_expand/README.md))
 `cd` up in the directory stack using multiple dots (multiple dots will get expanded if not enclosed in quotes).
@@ -15,8 +15,14 @@ Various aliases and functions are provided for the `ls` command.
 
 It uses dircolors to change the `LS_COLORS` variable. If [vivid](https://github.com/sharkdp/vivid) is installed it uses this instead. The default color scheme is based on the [solarized color scheme](https://en.wikipedia.org/wiki/Solarized_(color_scheme)).
 
+### stats ([README](plugins/DIRECTORY_AND_FILES/stats/README.md))
+The command `pstat` provides a cleaner formatted `stat` output. In addition `dud` and `duf` commands are provided to display directory and file size information.
+
 ### touch ([README](plugins/DIRECTORY_AND_FILES/touch/README.md))
 The command `toucht` is provided that uses templates provided in `~/Templates` on creation of a new file (if possible).
+
+### tree ([README](plugins/DIRECTORY_AND_FILES/tree/README.md))
+The commands `dirtree` and `filetree` are provided to display directories and files in a hierarchical manner.
 
 ### warp ([README](plugins/DIRECTORY_AND_FILES/warp/README.md))
 Command to manage so called 'warp points' (i.e. shortcuts) to a specific directory.
@@ -29,9 +35,6 @@ This plugins also automatically enables everything related to the `autocd` plugi
 
 
 ## Experimental
-
-- `dirtree` show non-hidden directories in tree format
-- `filetree` show non-hidden directories and files with their corresponding size
 - `cpwd` copy current working directory to clipboard
 - `mkdir` make parent directories if needed (nothing otherwise) and print created directories
 - `rmdir` delete all parent directories and print deleted directories
@@ -39,8 +42,6 @@ This plugins also automatically enables everything related to the `autocd` plugi
 - `findf` find files or directories with a given pattern in a given directory
 - `findh` find files or directories in the current directory with a given pattern
 - `pstat` show statistics for a file
-- `duc` list all non-hidden file sizes human-readable in descending order
-- `dua` list all file sizes human-readable in descending order
 - `rm` always ask before removing, preserve root directory and show deleted files/directories
 - `mv` always ask before moving and show moved files/directories
 - `cp` always ask before copying and show copied files/directories
