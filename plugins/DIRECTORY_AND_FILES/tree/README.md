@@ -4,6 +4,10 @@
 
 The plugin provides better directory trees.
 
+## Aliases
+
+If `tree` is present the functions `dirtree` and `filetree` are replaced with aliases to `tree`.
+
 ## Functions
 
 `dirtree` and `filetree` to show the directory/file structure in a hierarchical manner.
@@ -12,5 +16,3 @@ The plugin provides better directory trees.
 | -------------- | ------------------------------------------------------------------- |
 | `dirtree`      | show non-hidden directories in tree format                          |
 | `filetree`     | show non-hidden directories and files with their corresponding size |
-
-If `tree` is present `dirtree` and `filetree` are replaced with aliases to `tree`.
