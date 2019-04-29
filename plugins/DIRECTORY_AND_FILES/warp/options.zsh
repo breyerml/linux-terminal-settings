@@ -52,7 +52,7 @@ zstyle -e ':completion::*:-command-::' tag-order \
     fi
 '
 
-# TODO: doesn't work in all cases
+# TODO: doesn't work in all cases, dirtree breaks it
 # first try directories and then all globbed-files as Tags
 zstyle ':completion::*:*:*:' tag-order \
   'local-directories
