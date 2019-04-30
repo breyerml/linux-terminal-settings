@@ -1,16 +1,10 @@
 # title           : ls/aliases.zsh
 # description     : This file provides various aliases to the ls command.
-# date            : 2019-03-25
+# date            : 2019-04-30
 # dependencies    : -
 # zsh_version     : 5.7.1
 # ====================================================================================
 
-
-# color output if possible and change time stamp to (e.g.): 2019-03-05 18:48:51
-# TODO: testing
-if [[ "$(uname 2> /dev/null)" == 'Darwin' ]]; then
-  alias ls='gls'
-fi
 
 # use colors if possible and a custom time stamp format
 alias ls='ls --color=auto --time-style=+"%Y-%m-%d %H:%M:%S" --group-directories-first'
@@ -24,3 +18,9 @@ alias lt='ls -Alht'                         # list all files sorted by time (new
 alias ltr='ls -Alhtr'                       # list all files sorted by time (oldest first)
 alias lss='ls -AlhS'                        # list all files sorted by size (biggest first)
 alias lssr='ls -AlhSr'                      # list all files sorted by size (smallest first)
+
+# color output if possible and change time stamp to (e.g.): 2019-03-05 18:48:51
+# TODO: testing
+if [[ "$(uname 2> /dev/null)" == 'Darwin' ]]; then
+  alias ls='gls --color'
+fi
