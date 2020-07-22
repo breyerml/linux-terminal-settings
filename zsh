@@ -108,11 +108,8 @@ zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f
 
 if [[ -z $CUSTOM_ZSH_ROOT ]]; then
         export CUSTOM_ZSH_ROOT="$( cd "$(dirname "$0")" ; pwd -P )"
-	[ -r $CUSTOM_ZSH_ROOT/aliases.zsh ] && .  $CUSTOM_ZSH_ROOT/aliases.zsh
-	[ -r $CUSTOM_ZSH_ROOT/aliases/directory.zsh ] && source $CUSTOM_ZSH_ROOT/aliases/directory.zsh	
-	[ -r $CUSTOM_ZSH_ROOT/aliases/hardware.zsh ] && source $CUSTOM_ZSH_ROOT/aliases/hardware.zsh
 fi
-
+source $CUSTOM_ZSH_ROOT/plugins.zsh
 
 # extract compressed files
 extract() {
